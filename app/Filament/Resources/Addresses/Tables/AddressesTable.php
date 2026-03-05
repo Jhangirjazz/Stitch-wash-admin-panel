@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Filament\Resources\Addresses\Tables;
+
+use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\BulkActionGroup;
+
+class AddressesTable
+{
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->columns([
+                // TextColumn::make('id')->sortable(),
+                TextColumn::make('user.name')->label('User')->searchable(),
+                TextColumn::make('label')->searchable(),
+                TextColumn::make('address_line1')->label('Address')->limit(30),
+                TextColumn::make('city'),
+                IconColumn::make('is_default')->boolean(),
+                TextColumn::make('created_at')->dateTime(),
+            ])
+            ->filters([
+                // Add filters if needed (e.g., by city, by user)
+            ])
+            ->actions([
+                EditAction::make(),
+            ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+}
