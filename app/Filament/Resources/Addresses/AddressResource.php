@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Addresses;
 
+use UnitEnum;
 use App\Filament\Resources\Addresses\Pages\CreateAddress;
 use App\Filament\Resources\Addresses\Pages\EditAddress;
 use App\Filament\Resources\Addresses\Pages\ListAddresses;
@@ -19,6 +20,8 @@ class AddressResource extends Resource
     protected static ?string $model = Address::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static string|UnitEnum|null $navigationGroup = 'User Management';
 
     public static function form(Schema $schema): Schema
     {

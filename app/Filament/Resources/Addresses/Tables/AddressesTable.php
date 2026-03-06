@@ -20,6 +20,9 @@ class AddressesTable
                 TextColumn::make('label')->searchable(),
                 TextColumn::make('address_line1')->label('Address')->limit(30),
                 TextColumn::make('city'),
+                TextColumn::make('country'),
+                TextColumn::make('longitude'),
+                TextColumn::make('latitude'),
                 IconColumn::make('is_default')->boolean(),
                 TextColumn::make('created_at')->dateTime(),
             ])
