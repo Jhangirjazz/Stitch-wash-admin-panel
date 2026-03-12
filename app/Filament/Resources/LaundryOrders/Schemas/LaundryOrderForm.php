@@ -3,14 +3,13 @@
 namespace App\Filament\Resources\LaundryOrders\Schemas;
 
 use Filament\Forms\Components\DatePicker;
-use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
-use Illuminate\Support\HtmlString;
 
 class LaundryOrderForm
 {
@@ -24,7 +23,7 @@ class LaundryOrderForm
                     ->required()
                     ->maxLength(30)
                     ->unique(ignoreRecord: true)
-                    ->default(fn () => 'ORD-' . strtoupper(uniqid())),
+                    ->default(fn () => 'ORD-'.strtoupper(uniqid())),
                 Select::make('user_id')
                     ->relationship('user', 'name')
                     ->searchable()
@@ -45,16 +44,14 @@ class LaundryOrderForm
                 // Addresses
                 Select::make('pickup_address_id')
                     ->relationship('pickupAddress', 'address_line1')
-                    ->getOptionLabelFromRecordUsing(fn ($record) =>
-                        $record->label . ': ' . $record->address_line1 . ', ' . $record->area . ', ' . $record->city
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->label.': '.$record->address_line1.', '.$record->area.', '.$record->city
                     )
                     ->searchable()
                     ->preload()
                     ->nullable(),
                 Select::make('delivery_address_id')
                     ->relationship('deliveryAddress', 'address_line1')
-                    ->getOptionLabelFromRecordUsing(fn ($record) =>
-                        $record->label . ': ' . $record->address_line1 . ', ' . $record->area . ', ' . $record->city
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->label.': '.$record->address_line1.', '.$record->area.', '.$record->city
                     )
                     ->searchable()
                     ->preload()
@@ -62,10 +59,9 @@ class LaundryOrderForm
                 // Pickup slot
                 Select::make('pickup_slot_id')
                     ->relationship('pickupSlot', 'id')
-                    ->getOptionLabelFromRecordUsing(fn ($record) =>
-                        $record->slot_type . ' - ' .
-                        ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][$record->day_of_week] . ' ' .
-                        $record->start_time . '-' . $record->end_time
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->slot_type.' - '.
+                        ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][$record->day_of_week].' '.
+                        $record->start_time.'-'.$record->end_time
                     )
                     ->searchable()
                     ->preload()
@@ -75,10 +71,9 @@ class LaundryOrderForm
                 // Delivery slot (optional)
                 Select::make('delivery_slot_id')
                     ->relationship('deliverySlot', 'id')
-                    ->getOptionLabelFromRecordUsing(fn ($record) =>
-                        $record->slot_type . ' - ' .
-                        ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][$record->day_of_week] . ' ' .
-                        $record->start_time . '-' . $record->end_time
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->slot_type.' - '.
+                        ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][$record->day_of_week].' '.
+                        $record->start_time.'-'.$record->end_time
                     )
                     ->searchable()
                     ->preload()

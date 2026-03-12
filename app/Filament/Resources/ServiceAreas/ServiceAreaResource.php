@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\ServiceAreas;
 
-use UnitEnum;
 use App\Filament\Resources\ServiceAreas\Pages\CreateServiceArea;
 use App\Filament\Resources\ServiceAreas\Pages\EditServiceArea;
 use App\Filament\Resources\ServiceAreas\Pages\ListServiceAreas;
@@ -14,15 +13,17 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class ServiceAreaResource extends Resource
 {
     protected static ?string $model = ServiceArea::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    protected static string|UnitEnum|null $navigationGroup = 'Operations';
-    protected static ?int $navigationSort = 1; // adjust per resource
 
+    protected static string|UnitEnum|null $navigationGroup = 'Operations';
+
+    protected static ?int $navigationSort = 1; // adjust per resource
 
     public static function form(Schema $schema): Schema
     {

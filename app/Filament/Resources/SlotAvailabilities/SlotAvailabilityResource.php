@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\SlotAvailabilities;
 
-use UnitEnum;
 use App\Filament\Resources\SlotAvailabilities\Pages\CreateSlotAvailability;
 use App\Filament\Resources\SlotAvailabilities\Pages\EditSlotAvailability;
 use App\Filament\Resources\SlotAvailabilities\Pages\ListSlotAvailabilities;
@@ -14,13 +13,16 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SlotAvailabilityResource extends Resource
 {
     protected static ?string $model = SlotAvailability::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
     protected static string|UnitEnum|null $navigationGroup = 'Scheduling';
+
     protected static ?int $navigationSort = 2;
 
     public static function form(Schema $schema): Schema

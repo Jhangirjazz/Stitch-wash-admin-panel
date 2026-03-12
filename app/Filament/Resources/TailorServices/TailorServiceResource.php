@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\TailorServices;
 
-use UnitEnum;
 use App\Filament\Resources\TailorServices\Pages\CreateTailorService;
 use App\Filament\Resources\TailorServices\Pages\EditTailorService;
 use App\Filament\Resources\TailorServices\Pages\ListTailorServices;
@@ -14,13 +13,16 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class TailorServiceResource extends Resource
 {
     protected static ?string $model = TailorService::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
     protected static string|UnitEnum|null $navigationGroup = 'Tailor Management';
+
     protected static ?int $navigationSort = 3; // adjust per resource (services first, then bookings, then measurements)
 
     public static function form(Schema $schema): Schema

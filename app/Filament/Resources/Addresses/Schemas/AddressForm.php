@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources\Addresses\Schemas;
 
+use App\Filament\Forms\Components\LocationPicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
-use App\Filament\Forms\Components\LocationPicker;
 
 class AddressForm
 {
@@ -54,7 +54,7 @@ class AddressForm
                     ->nullable()
                     ->rules(['nullable', 'numeric', 'between:-180,180'])
                     ->validationMessages([
-                    'between' => 'Longitude must be between -180 and 180 degrees.',
+                        'between' => 'Longitude must be between -180 and 180 degrees.',
                     ]),
                 LocationPicker::make('location_picker')
                     ->label('Pick location on map')
@@ -71,7 +71,7 @@ class AddressForm
                         $set('country', ($state['country'] ?? 'AE'));
                     })
                     ->columnSpanFull(),
-                                Toggle::make('is_default')
+                Toggle::make('is_default')
                     ->default(false),
             ]);
     }

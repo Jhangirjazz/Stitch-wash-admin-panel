@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\FabricFavorites;
 
-use UnitEnum;
 use App\Filament\Resources\FabricFavorites\Pages\CreateFabricFavorite;
 use App\Filament\Resources\FabricFavorites\Pages\EditFabricFavorite;
 use App\Filament\Resources\FabricFavorites\Pages\ListFabricFavorites;
@@ -14,13 +13,16 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class FabricFavoriteResource extends Resource
 {
     protected static ?string $model = FabricFavorite::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
     protected static string|UnitEnum|null $navigationGroup = 'Fabrics';
+
     protected static ?int $navigationSort = 3; // adjust for each
 
     public static function form(Schema $schema): Schema

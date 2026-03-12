@@ -4,12 +4,11 @@ namespace App\Filament\Resources\JobAssignments\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
-use Illuminate\Database\Eloquent\Builder;
 
 class JobAssignmentForm
 {
@@ -32,17 +31,18 @@ class JobAssignmentForm
                     ->options(function ($get) {
                         $type = $get('assignment_type');
                         // Debug: dump to log
-                        \Log::info('Assignment type: ' . ($type ?? 'null'));
+                        \Log::info('Assignment type: '.($type ?? 'null'));
                         if ($type === 'laundry_pickup' || $type === 'laundry_delivery') {
                             return \App\Models\LaundryOrder::query()->pluck('order_number', 'id');
                         } elseif ($type === 'tailor_visit') {
                             return \App\Models\TailorBooking::query()->pluck('booking_number', 'id');
                         }
+
                         return [];
                     })
                     ->live() // make sure it's live
                     ->required(),
-                                // The reference_type is set automatically based on assignment_type
+                // The reference_type is set automatically based on assignment_type
                 Select::make('assigned_to')
                     ->relationship('assignedTo', 'name')
                     ->searchable()

@@ -16,10 +16,9 @@ class SlotAvailabilityForm
             ->components([
                 Select::make('time_slot_id')
                     ->relationship('timeSlot', 'id')
-                    ->getOptionLabelFromRecordUsing(fn ($record) =>
-                        $record->slot_type . ' - ' .
-                        ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][$record->day_of_week] . ' ' .
-                        $record->start_time . '-' . $record->end_time
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->slot_type.' - '.
+                        ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][$record->day_of_week].' '.
+                        $record->start_time.'-'.$record->end_time
                     )
                     ->searchable()
                     ->preload()

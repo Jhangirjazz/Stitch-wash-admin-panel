@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\LaundryOrderStages;
 
-use UnitEnum;
 use App\Filament\Resources\LaundryOrderStages\Pages\CreateLaundryOrderStage;
 use App\Filament\Resources\LaundryOrderStages\Pages\EditLaundryOrderStage;
 use App\Filament\Resources\LaundryOrderStages\Pages\ListLaundryOrderStages;
@@ -14,13 +13,16 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class LaundryOrderStageResource extends Resource
 {
     protected static ?string $model = LaundryOrderStage::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
     protected static string|UnitEnum|null $navigationGroup = 'Laundry Management';
+
     protected static ?int $navigationSort = 6; // adjust order as needed
 
     public static function form(Schema $schema): Schema

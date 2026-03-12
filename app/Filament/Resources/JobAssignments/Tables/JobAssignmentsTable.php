@@ -2,15 +2,13 @@
 
 namespace App\Filament\Resources\JobAssignments\Tables;
 
-use Filament\Tables\Table;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\BulkActionGroup;
 use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Filters\Filter;
-use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Table;
 
 class JobAssignmentsTable
 {
@@ -23,8 +21,7 @@ class JobAssignmentsTable
                     ->badge(),
                 TextColumn::make('reference')
                     ->label('Reference #')
-                    ->formatStateUsing(fn ($record) =>
-                        $record->reference?->order_number ?? $record->reference?->booking_number ?? '-'
+                    ->formatStateUsing(fn ($record) => $record->reference?->order_number ?? $record->reference?->booking_number ?? '-'
                     ),
                 TextColumn::make('assignedTo.name')
                     ->label('Assigned To'),

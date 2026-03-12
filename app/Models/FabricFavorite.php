@@ -25,4 +25,4 @@ class FabricFavorite extends Model
     {
         return $this->belongsTo(Fabric::class, 'fabric_id');
     }
-}   
+}

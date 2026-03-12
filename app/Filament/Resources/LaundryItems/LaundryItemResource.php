@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\LaundryItems;
 
-use UnitEnum;
 use App\Filament\Resources\LaundryItems\Pages\CreateLaundryItem;
 use App\Filament\Resources\LaundryItems\Pages\EditLaundryItem;
 use App\Filament\Resources\LaundryItems\Pages\ListLaundryItems;
@@ -14,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class LaundryItemResource extends Resource
 {

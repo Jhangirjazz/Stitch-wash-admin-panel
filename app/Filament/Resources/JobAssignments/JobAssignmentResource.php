@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\JobAssignments;
 
-use UnitEnum;
 use App\Filament\Resources\JobAssignments\Pages\CreateJobAssignment;
 use App\Filament\Resources\JobAssignments\Pages\EditJobAssignment;
 use App\Filament\Resources\JobAssignments\Pages\ListJobAssignments;
@@ -14,13 +13,16 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class JobAssignmentResource extends Resource
 {
     protected static ?string $model = JobAssignment::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
     protected static string|UnitEnum|null $navigationGroup = 'Operations';
+
     protected static ?int $navigationSort = 2; // adjust per resource
 
     public static function form(Schema $schema): Schema
@@ -49,7 +51,7 @@ class JobAssignmentResource extends Resource
         ];
     }
 
-        protected function mutateFormDataBeforeCreate(array $data): array
+    protected function mutateFormDataBeforeCreate(array $data): array
     {
         $typeMap = [
             'laundry_pickup' => 'laundry_order',
@@ -57,6 +59,7 @@ class JobAssignmentResource extends Resource
             'tailor_visit' => 'tailor_booking',
         ];
         $data['reference_type'] = $typeMap[$data['assignment_type']] ?? null;
+
         return $data;
     }
 
@@ -68,8 +71,7 @@ class JobAssignmentResource extends Resource
             'tailor_visit' => 'tailor_booking',
         ];
         $data['reference_type'] = $typeMap[$data['assignment_type']] ?? null;
+
         return $data;
     }
-
-
 }

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\TimeSlots;
 
-use UnitEnum;
 use App\Filament\Resources\TimeSlots\Pages\CreateTimeSlot;
 use App\Filament\Resources\TimeSlots\Pages\EditTimeSlot;
 use App\Filament\Resources\TimeSlots\Pages\ListTimeSlots;
@@ -14,13 +13,16 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class TimeSlotResource extends Resource
 {
     protected static ?string $model = TimeSlot::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
     protected static string|UnitEnum|null $navigationGroup = 'Scheduling';
+
     protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema

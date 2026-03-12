@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,8 +23,8 @@ class AppServiceProvider extends ServiceProvider
         //
 
         Relation::morphMap([
-        'laundry_order' => \App\Models\LaundryOrder::class,
-        'tailor_booking' => \App\Models\TailorBooking::class,
+            'laundry_order' => \App\Models\LaundryOrder::class,
+            'tailor_booking' => \App\Models\TailorBooking::class,
         ]);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Addresses;
 
-use UnitEnum;
 use App\Filament\Resources\Addresses\Pages\CreateAddress;
 use App\Filament\Resources\Addresses\Pages\EditAddress;
 use App\Filament\Resources\Addresses\Pages\ListAddresses;
@@ -14,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class AddressResource extends Resource
 {
@@ -39,8 +39,6 @@ class AddressResource extends Resource
             //
         ];
     }
-
-    
 
     public static function getPages(): array
     {

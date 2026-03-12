@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\TailorBookings\Schemas;
 
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -21,7 +20,7 @@ class TailorBookingForm
                     ->required()
                     ->maxLength(30)
                     ->unique(ignoreRecord: true)
-                    ->default(fn () => 'TB-' . strtoupper(uniqid())),
+                    ->default(fn () => 'TB-'.strtoupper(uniqid())),
                 Select::make('user_id')
                     ->relationship('user', 'name')
                     ->searchable()
@@ -34,18 +33,16 @@ class TailorBookingForm
                     ->required(),
                 Select::make('address_id')
                     ->relationship('address', 'address_line1')
-                    ->getOptionLabelFromRecordUsing(fn ($record) =>
-                        $record->label . ': ' . $record->address_line1 . ', ' . $record->area . ', ' . $record->city
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->label.': '.$record->address_line1.', '.$record->area.', '.$record->city
                     )
                     ->searchable()
                     ->preload()
                     ->required(),
                 Select::make('time_slot_id')
                     ->relationship('timeSlot', 'id')
-                    ->getOptionLabelFromRecordUsing(fn ($record) =>
-                        $record->slot_type . ' - ' .
-                        ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][$record->day_of_week] . ' ' .
-                        $record->start_time . '-' . $record->end_time
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->slot_type.' - '.
+                        ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][$record->day_of_week].' '.
+                        $record->start_time.'-'.$record->end_time
                     )
                     ->searchable()
                     ->preload()

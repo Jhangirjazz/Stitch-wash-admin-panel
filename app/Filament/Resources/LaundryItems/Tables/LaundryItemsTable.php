@@ -2,15 +2,15 @@
 
 namespace App\Filament\Resources\LaundryItems\Tables;
 
-use Filament\Tables\Table;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\BulkActionGroup;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Table;
 
 class LaundryItemsTable
 {
@@ -25,7 +25,7 @@ class LaundryItemsTable
                 ImageColumn::make('icon_url')
                     ->label('Icon')
                     ->circular()
-                    ->size(40),    
+                    ->size(40),
                 TextColumn::make('category.name')
                     ->label('Category')
                     ->searchable()

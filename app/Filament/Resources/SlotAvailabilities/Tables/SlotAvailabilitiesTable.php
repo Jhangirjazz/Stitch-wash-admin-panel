@@ -2,16 +2,16 @@
 
 namespace App\Filament\Resources\SlotAvailabilities\Tables;
 
-use Filament\Tables\Table;
-use Filament\Tables\Filters\TernaryFilter;
-use Filament\Forms\Components\DatePicker;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\BulkActionGroup;
-use Filament\Tables\Filters\SelectFilter;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
 class SlotAvailabilitiesTable
@@ -23,8 +23,7 @@ class SlotAvailabilitiesTable
                 // TextColumn::make('id')->sortable(),
                 TextColumn::make('timeSlot.slot_type')->badge(),
                 TextColumn::make('timeSlot.day_of_week')
-                    ->formatStateUsing(fn ($record) =>
-                        ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][$record->timeSlot->day_of_week] ?? ''
+                    ->formatStateUsing(fn ($record) => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][$record->timeSlot->day_of_week] ?? ''
                     ),
                 TextColumn::make('timeSlot.start_time')->time('H:i'),
                 TextColumn::make('timeSlot.end_time')->time('H:i'),

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\LaundryOrderBags;
 
-use UnitEnum;
 use App\Filament\Resources\LaundryOrderBags\Pages\CreateLaundryOrderBag;
 use App\Filament\Resources\LaundryOrderBags\Pages\EditLaundryOrderBag;
 use App\Filament\Resources\LaundryOrderBags\Pages\ListLaundryOrderBags;
@@ -14,13 +13,16 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class LaundryOrderBagResource extends Resource
 {
     protected static ?string $model = LaundryOrderBag::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
     protected static string|UnitEnum|null $navigationGroup = 'Laundry Management';
+
     protected static ?int $navigationSort = 5; // adjust order as needed
 
     public static function form(Schema $schema): Schema

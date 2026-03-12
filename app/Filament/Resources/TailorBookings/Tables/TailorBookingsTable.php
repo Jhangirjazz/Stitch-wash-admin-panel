@@ -2,14 +2,14 @@
 
 namespace App\Filament\Resources\TailorBookings\Tables;
 
-use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\BulkActionGroup;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Filters\Filter;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
 class TailorBookingsTable
@@ -30,8 +30,7 @@ class TailorBookingsTable
                     ->date()
                     ->sortable(),
                 TextColumn::make('timeSlot')
-                    ->formatStateUsing(fn ($record) =>
-                        $record->timeSlot?->start_time . '-' . $record->timeSlot?->end_time
+                    ->formatStateUsing(fn ($record) => $record->timeSlot?->start_time.'-'.$record->timeSlot?->end_time
                     ),
                 TextColumn::make('status')
                     ->badge(),
