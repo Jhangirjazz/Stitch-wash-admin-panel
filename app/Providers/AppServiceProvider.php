@@ -25,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap([
             'laundry_order' => \App\Models\LaundryOrder::class,
             'tailor_booking' => \App\Models\TailorBooking::class,
+            'laundry' => \App\Models\LaundryOrder::class,
+            'tailor'  => \App\Models\TailorBooking::class,
         ]);
     }
 }
