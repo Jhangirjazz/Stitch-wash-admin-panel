@@ -38,7 +38,8 @@ class LaundryOrderPhotoResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+        \App\Filament\Resources\LaundryOrderPhoto\RelationManagers\StainMarkersRelationManager::class,
+
         ];
     }
 

@@ -38,7 +38,13 @@ class LaundryOrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+
+        \App\Filament\Resources\LaundryOrders\RelationManagers\ItemsRelationManager::class,
+        \App\Filament\Resources\LaundryOrders\RelationManagers\BagsRelationManager::class,
+        \App\Filament\Resources\LaundryOrders\RelationManagers\StagesRelationManager::class,
+        \App\Filament\Resources\LaundryOrders\RelationManagers\PhotosRelationManager::class,    
+
+
         ];
     }
 
