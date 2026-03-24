@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\LaundryStainMarkers;
 
+use UnitEnum;
 use App\Filament\Resources\LaundryStainMarkers\Pages\CreateLaundryStainMarker;
 use App\Filament\Resources\LaundryStainMarkers\Pages\EditLaundryStainMarker;
 use App\Filament\Resources\LaundryStainMarkers\Pages\ListLaundryStainMarkers;
@@ -18,7 +19,10 @@ class LaundryStainMarkerResource extends Resource
 {
     protected static ?string $model = LaundryStainMarker::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedExclamationCircle;
+    protected static string|UnitEnum|null $navigationGroup = 'Laundry Management';
+    protected static ?int $navigationSort = 6; // after photos
+
 
     public static function form(Schema $schema): Schema
     {

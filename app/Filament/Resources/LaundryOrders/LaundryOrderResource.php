@@ -19,7 +19,7 @@ class LaundryOrderResource extends Resource
 {
     protected static ?string $model = LaundryOrder::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingCart;
 
     protected static string|UnitEnum|null $navigationGroup = 'Laundry Management';
 
@@ -43,8 +43,6 @@ class LaundryOrderResource extends Resource
         \App\Filament\Resources\LaundryOrders\RelationManagers\BagsRelationManager::class,
         \App\Filament\Resources\LaundryOrders\RelationManagers\StagesRelationManager::class,
         \App\Filament\Resources\LaundryOrders\RelationManagers\PhotosRelationManager::class,    
-
-
         ];
     }
 

@@ -19,7 +19,7 @@ class WalletTransactionResource extends Resource
 {
     protected static ?string $model = WalletTransaction::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowsRightLeft;
     protected static string|UnitEnum|null $navigationGroup = 'Payments';
     protected static ?int $navigationSort = 5; // adjust order
 

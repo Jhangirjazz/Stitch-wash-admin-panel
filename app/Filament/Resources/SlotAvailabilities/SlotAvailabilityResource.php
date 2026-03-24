@@ -19,7 +19,7 @@ class SlotAvailabilityResource extends Resource
 {
     protected static ?string $model = SlotAvailability::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendar;
 
     protected static string|UnitEnum|null $navigationGroup = 'Scheduling';
 

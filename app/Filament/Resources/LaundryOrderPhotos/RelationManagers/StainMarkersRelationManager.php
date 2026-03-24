@@ -2,14 +2,6 @@
 
 namespace App\Filament\Resources\LaundryOrderPhotos\RelationManagers;
 
-use Filament\Actions\AssociateAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\CreateAction;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\DissociateAction;
-use Filament\Actions\DissociateBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
@@ -20,60 +12,49 @@ class StainMarkersRelationManager extends RelationManager
 {
     protected static string $relationship = 'stainMarkers';
 
-    public function form(Schema $schema): Schema
+    protected static ?string $recordTitleAttribute = 'id';
+
+    public function form(Schema $schema): Schema  // Changed from Form to Schema
     {
         return $schema
             ->components([
                 TextInput::make('x_percent')
-                    ->required()
-                    ->numeric(),
+                    ->label('X Position (%)')
+                    ->numeric()
+                    ->step(0.01)
+                    ->minValue(0)
+                    ->maxValue(100)
+                    ->required(),
                 TextInput::make('y_percent')
-                    ->required()
-                    ->numeric(),
+                    ->label('Y Position (%)')
+                    ->numeric()
+                    ->step(0.01)
+                    ->minValue(0)
+                    ->maxValue(100)
+                    ->required(),
                 TextInput::make('description')
-                    ->default(null),
+                    ->maxLength(255)
+                    ->nullable(),
             ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('photo_id')
             ->columns([
                 TextColumn::make('x_percent')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('X (%)'),
                 TextColumn::make('y_percent')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Y (%)'),
                 TextColumn::make('description')
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
+                    ->limit(30),
             ])
             ->headerActions([
-                CreateAction::make(),
-                AssociateAction::make(),
+                \Filament\Tables\Actions\CreateAction::make(),
             ])
-            ->recordActions([
-                EditAction::make(),
-                DissociateAction::make(),
-                DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DissociateBulkAction::make(),
-                    DeleteBulkAction::make(),
-                ]),
+            ->actions([
+                \Filament\Tables\Actions\EditAction::make(),
+                \Filament\Tables\Actions\DeleteAction::make(),
             ]);
     }
 }

@@ -19,7 +19,7 @@ class FabricFavoriteResource extends Resource
 {
     protected static ?string $model = FabricFavorite::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHeart;
 
     protected static string|UnitEnum|null $navigationGroup = 'Fabrics';
 

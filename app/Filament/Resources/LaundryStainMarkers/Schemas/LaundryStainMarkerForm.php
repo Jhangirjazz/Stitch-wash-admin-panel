@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\LaundryStainMarkers\Schemas;
+namespace App\Filament\Resources\LaundryStainMarker\Schemas;
 
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -11,17 +13,31 @@ class LaundryStainMarkerForm
     {
         return $schema
             ->components([
-                TextInput::make('photo_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('photo_id')
+                    ->relationship('photo', 'id')
+                    ->getOptionLabelFromRecordUsing(fn ($record) => 
+                        'Photo #' . $record->id . ' - ' . ($record->photo_type ?? 'Unknown')
+                    )
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 TextInput::make('x_percent')
-                    ->required()
-                    ->numeric(),
+                    ->label('X Position (%)')
+                    ->numeric()
+                    ->step(0.01)
+                    ->minValue(0)
+                    ->maxValue(100)
+                    ->required(),
                 TextInput::make('y_percent')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('description')
-                    ->default(null),
+                    ->label('Y Position (%)')
+                    ->numeric()
+                    ->step(0.01)
+                    ->minValue(0)
+                    ->maxValue(100)
+                    ->required(),
+                Textarea::make('description')
+                    ->maxLength(255)
+                    ->nullable(),
             ]);
     }
 }

@@ -19,7 +19,7 @@ class PromoCodeResource extends Resource
 {
     protected static ?string $model = PromoCode::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTicket;
     protected static string|UnitEnum|null $navigationGroup = 'Payments';
     protected static ?int $navigationSort = 3; // adjust order
 

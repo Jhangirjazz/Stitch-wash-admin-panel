@@ -19,7 +19,7 @@ class FabricImageResource extends Resource
 {
     protected static ?string $model = FabricImage::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
 
     protected static string|UnitEnum|null $navigationGroup = 'Fabrics';
 

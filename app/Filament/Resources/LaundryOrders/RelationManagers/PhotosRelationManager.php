@@ -2,100 +2,116 @@
 
 namespace App\Filament\Resources\LaundryOrders\RelationManagers;
 
-use Filament\Actions\AssociateAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\CreateAction;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\DissociateAction;
-use Filament\Actions\DissociateBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class PhotosRelationManager extends RelationManager
 {
     protected static string $relationship = 'photos';
 
+    protected static ?string $recordTitleAttribute = 'id';
+
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-                TextInput::make('stage_id')
-                    ->numeric()
-                    ->default(null),
+                Select::make('stage_id')
+                    ->label('Stage')
+                    ->options(function () {
+                        $orderId = $this->ownerRecord->id;
+                        return \App\Models\LaundryOrderStage::where('order_id', $orderId)
+                            ->pluck('stage', 'id');
+                    })
+                    ->placeholder('Select stage (optional)')
+                    ->nullable(),
                 Select::make('photo_type')
                     ->options([
-            'before' => 'Before',
-            'after' => 'After',
-            'stain' => 'Stain',
-            'qc' => 'Qc',
-            'pickup_proof' => 'Pickup proof',
-            'delivery_proof' => 'Delivery proof',
-        ])
+                        'before' => 'Before',
+                        'after' => 'After',
+                        'stain' => 'Stain',
+                        'qc' => 'Quality Check',
+                        'pickup_proof' => 'Pickup Proof',
+                        'delivery_proof' => 'Delivery Proof',
+                    ])
                     ->required(),
+                // Use TextInput with helper text instead of FileUpload
                 TextInput::make('file_url')
-                    ->url()
-                    ->required(),
+                    ->label('Photo URL')
+                    ->placeholder('Enter the image URL or path')
+                    ->helperText('You can upload images via the media manager and paste the URL here')
+                    ->required()
+                    ->columnSpanFull(),
                 TextInput::make('thumbnail_url')
-                    ->url()
-                    ->default(null),
-                TextInput::make('uploaded_by')
-                    ->numeric()
-                    ->default(null),
+                    ->label('Thumbnail URL (optional)')
+                    ->placeholder('Enter thumbnail URL')
+                    ->helperText('Optional smaller version of the image')
+                    ->nullable()
+                    ->columnSpanFull(),
+                Select::make('uploaded_by')
+                    ->label('Uploaded By')
+                    ->options(function () {
+                        return \App\Models\User::whereIn('role', ['admin', 'laundry_staff', 'driver'])
+                            ->pluck('name', 'id');
+                    })
+                    ->placeholder('Select staff member')
+                    ->nullable(),
                 TextInput::make('caption')
-                    ->default(null),
+                    ->maxLength(255)
+                    ->placeholder('Add a caption...')
+                    ->nullable()
+                    ->columnSpanFull(),
             ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('order_id')
             ->columns([
-                TextColumn::make('stage_id')
-                    ->numeric()
-                    ->sortable(),
+                // Show image from URL
+                ImageColumn::make('file_url')
+                    ->label('Photo')
+                    ->circular()
+                    ->size(50),
                 TextColumn::make('photo_type')
                     ->badge(),
-                TextColumn::make('file_url')
-                    ->searchable(),
-                TextColumn::make('thumbnail_url')
-                    ->searchable(),
-                TextColumn::make('uploaded_by')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('stage.stage')
+                    ->label('Stage')
+                    ->default('No stage'),
+                TextColumn::make('uploadedBy.name')
+                    ->label('Uploaded By')
+                    ->default('Unknown'),
                 TextColumn::make('caption')
-                    ->searchable(),
+                    ->limit(30),
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->dateTime(),
             ])
             ->filters([
-                //
+                SelectFilter::make('photo_type')
+                    ->options([
+                        'before' => 'Before',
+                        'after' => 'After',
+                        'stain' => 'Stain',
+                        'qc' => 'Quality Check',
+                        'pickup_proof' => 'Pickup Proof',
+                        'delivery_proof' => 'Delivery Proof',
+                    ]),
             ])
             ->headerActions([
-                CreateAction::make(),
-                AssociateAction::make(),
+                \Filament\Tables\Actions\CreateAction::make(),
             ])
-            ->recordActions([
-                EditAction::make(),
-                DissociateAction::make(),
-                DeleteAction::make(),
+            ->actions([
+                \Filament\Tables\Actions\EditAction::make(),
+                \Filament\Tables\Actions\DeleteAction::make(),
             ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DissociateBulkAction::make(),
-                    DeleteBulkAction::make(),
+            ->bulkActions([
+                \Filament\Tables\Actions\BulkActionGroup::make([
+                    \Filament\Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
